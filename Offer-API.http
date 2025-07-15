@@ -1,0 +1,24 @@
+@Offer_API_HostAddress = http://localhost:5092
+
+POST {{Offer_API_HostAddress}}/api/offers 
+Content-Type: application/json 
+Accept: application/json
+{ "brand": "Нет", "model": "Нет", "supplierName": "Нет" }
+###
+
+POST {{Offer_API_HostAddress}}/api/offers 
+Content-Type: application/json 
+Accept: application/json
+{ "brand": "Тест", "model": "Тест", "supplierName": "Тачковоз" }
+###
+
+GET {{Offer_API_HostAddress}}/api/offers/search 
+Accept: application/json
+###
+
+GET {{Offer_API_HostAddress}}/api/offers/search?searchTerm=Toyota 
+Accept: application/json
+###
+
+GET {{Offer_API_HostAddress}}/api/suppliers/popular 
+Accept: application/json
