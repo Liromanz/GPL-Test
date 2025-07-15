@@ -16,7 +16,7 @@ GET {{Offer_API_HostAddress}}/api/offers/search
 Accept: application/json
 ###
 
-GET {{Offer_API_HostAddress}}/api/offers/search?searchTerm=Toyota 
+GET {{Offer_API_HostAddress}}/api/offers/search?searchTerm=Matiz 
 Accept: application/json
 ###
 

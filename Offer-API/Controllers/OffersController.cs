@@ -17,7 +17,6 @@ namespace Offer_API.Controllers
             _context = context;
         }
 
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<OfferDto>> OfferCreate(OfferDto offerDto)
         {
@@ -64,7 +63,7 @@ namespace Offer_API.Controllers
             }).ToListAsync();
             var totalCount = await query.CountAsync();
 
-            return new OfferSearchResultDto{ Offers = offers, TotalCount = totalCount };
+            return new OfferSearchResultDto { Offers = offers, TotalCount = totalCount };
         }
     }
 }
