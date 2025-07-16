@@ -1,8 +1,8 @@
-import { Children } from "react";
-import { Header, headerComponents } from "../components/Header/component";
+import { Header } from "../components/Header/component";
 import { Outlet } from "react-router-dom";
+import { useHeaderComponents } from "../components/Header/types";
 
-const headerComps: headerComponents = {
+const headerComps: useHeaderComponents = {
     comps: [
         {
             name: "Популярные поставщики",

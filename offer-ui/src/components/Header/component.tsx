@@ -1,15 +1,7 @@
 import { Link } from "react-router-dom"
+import { useHeaderComponents } from "./types"
 
-type content = {
-    name: string,
-    routeTo: string
-}
-
-export type headerComponents = {
-    comps : content[]
-}
-
-export const Header: React.FC<headerComponents> = ({comps}) => {
+export const Header: React.FC<useHeaderComponents> = ({comps}) => {
     return (
         <header className="d-flex justify-content-center py-3 bg-dark">
             <ul className="nav nav-pills">

@@ -1,10 +1,8 @@
 import { OfferDto } from "../../types/OfferDTO";
+import { useOffers } from "./types";
 
-type passedOffers = {
-    offers: OfferDto[]
-}
 
-export const OfferTable: React.FC<passedOffers> = ({ offers }) => {
+export const OfferTable: React.FC<useOffers> = ({ offers }) => {
     return (
         <table className="table table-striped my-3">
             <thead>

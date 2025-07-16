@@ -1,7 +1,4 @@
-export type SupplierDto = {
-  name: string;
-  offerCount: number;
-}
+import { SupplierDto } from "../../types/SupplierDTO"
 
 export const PopularCard: React.FC<SupplierDto> = ({name, offerCount}) => {
     return (

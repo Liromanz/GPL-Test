@@ -1,11 +1,10 @@
 import React from "react"
-import { PopularCard, SupplierDto } from "../../components/PopularCard/component"
+import { PopularCard } from "../../../components/PopularCard/component"
+import { PopularSuppliers } from "../model/usePopularSuppliers"
 
-type popularSuppliers = {
-    suppliers: SupplierDto[]
-}
 
-const Popular: React.FC<popularSuppliers> = ({suppliers}) => {
+
+const Popular: React.FC<PopularSuppliers> = ({suppliers}) => {
     return (
         <div className="container">
             <h1 className="text-center m-3">Популярные поставщики</h1>

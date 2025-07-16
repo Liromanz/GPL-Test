@@ -1,12 +1,8 @@
-import { OfferTable } from "../../components/OfferTable/component"
-import { OfferDto, OfferSearchDto } from "../../types/OfferDTO";
+import { OfferTable } from "../../../components/OfferTable/component"
+import { OfferSearch } from "../model/useOfferSearch";
 
-export interface passedOfferSearchResult {
-    resultedSearchOffers: OfferSearchDto
-    onSearch: (term: string) => void
-}
 
-const Search: React.FC<passedOfferSearchResult> = ({ resultedSearchOffers, onSearch }) => {
+const Search: React.FC<OfferSearch> = ({ resultedSearchOffers, onSearch }) => {
     return (
         <div className="container">
             <h1 className="text-center m-3">Поиск по офферам</h1>
@@ -20,6 +16,5 @@ const Search: React.FC<passedOfferSearchResult> = ({ resultedSearchOffers, onSea
         </div>
     )
 }
-
 
 export default Search
