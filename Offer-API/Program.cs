@@ -7,13 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-#if DEBUG
-builder.Services.AddDbContext<OfferDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("defCon")));
-#else
 builder.Services.AddDbContext<OfferDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("defCon")));
-#endif
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
