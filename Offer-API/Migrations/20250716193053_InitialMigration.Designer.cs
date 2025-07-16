@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Offer_API.Repository;
@@ -11,34 +12,40 @@ using Offer_API.Repository;
 namespace Offer_API.Migrations
 {
     [DbContext(typeof(OfferDbContext))]
-    [Migration("20250715143921_Initialize")]
-    partial class Initialize
+    [Migration("20250716193053_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.18");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.18")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Offer_API.Models.Offer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Brand")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("SupplierId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -52,7 +59,7 @@ namespace Offer_API.Migrations
                             Id = 1,
                             Brand = "Toyota",
                             Model = "Camry",
-                            RegistrationDate = new DateTime(2025, 7, 10, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1213),
+                            RegistrationDate = new DateTime(2025, 7, 11, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5616),
                             SupplierId = 1
                         },
                         new
@@ -60,7 +67,7 @@ namespace Offer_API.Migrations
                             Id = 2,
                             Brand = "Honda",
                             Model = "Civic",
-                            RegistrationDate = new DateTime(2025, 7, 11, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1217),
+                            RegistrationDate = new DateTime(2025, 7, 12, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5617),
                             SupplierId = 1
                         },
                         new
@@ -68,7 +75,7 @@ namespace Offer_API.Migrations
                             Id = 3,
                             Brand = "Ford",
                             Model = "Focus",
-                            RegistrationDate = new DateTime(2025, 7, 12, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1220),
+                            RegistrationDate = new DateTime(2025, 7, 13, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5619),
                             SupplierId = 1
                         },
                         new
@@ -76,7 +83,7 @@ namespace Offer_API.Migrations
                             Id = 4,
                             Brand = "BMW",
                             Model = "X5",
-                            RegistrationDate = new DateTime(2025, 7, 13, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1223),
+                            RegistrationDate = new DateTime(2025, 7, 14, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5620),
                             SupplierId = 2
                         },
                         new
@@ -84,7 +91,7 @@ namespace Offer_API.Migrations
                             Id = 5,
                             Brand = "Audi",
                             Model = "A4",
-                            RegistrationDate = new DateTime(2025, 7, 14, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1225),
+                            RegistrationDate = new DateTime(2025, 7, 15, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5621),
                             SupplierId = 2
                         },
                         new
@@ -92,7 +99,7 @@ namespace Offer_API.Migrations
                             Id = 6,
                             Brand = "Mercedes",
                             Model = "C-Class",
-                            RegistrationDate = new DateTime(2025, 7, 15, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1228),
+                            RegistrationDate = new DateTime(2025, 7, 16, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5623),
                             SupplierId = 2
                         },
                         new
@@ -100,7 +107,7 @@ namespace Offer_API.Migrations
                             Id = 7,
                             Brand = "Daewoo",
                             Model = "Matiz",
-                            RegistrationDate = new DateTime(2025, 7, 9, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1230),
+                            RegistrationDate = new DateTime(2025, 7, 10, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5624),
                             SupplierId = 3
                         },
                         new
@@ -108,7 +115,7 @@ namespace Offer_API.Migrations
                             Id = 8,
                             Brand = "Hyundai",
                             Model = "Tucson",
-                            RegistrationDate = new DateTime(2025, 7, 10, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1232),
+                            RegistrationDate = new DateTime(2025, 7, 11, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5625),
                             SupplierId = 3
                         },
                         new
@@ -116,7 +123,7 @@ namespace Offer_API.Migrations
                             Id = 9,
                             Brand = "Kia",
                             Model = "Sportage",
-                            RegistrationDate = new DateTime(2025, 7, 11, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1235),
+                            RegistrationDate = new DateTime(2025, 7, 12, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5626),
                             SupplierId = 3
                         },
                         new
@@ -124,7 +131,7 @@ namespace Offer_API.Migrations
                             Id = 10,
                             Brand = "Nissan",
                             Model = "Juke",
-                            RegistrationDate = new DateTime(2025, 7, 12, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1237),
+                            RegistrationDate = new DateTime(2025, 7, 13, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5628),
                             SupplierId = 4
                         },
                         new
@@ -132,7 +139,7 @@ namespace Offer_API.Migrations
                             Id = 11,
                             Brand = "Chevrolet",
                             Model = "Malibu",
-                            RegistrationDate = new DateTime(2025, 7, 13, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1239),
+                            RegistrationDate = new DateTime(2025, 7, 14, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5629),
                             SupplierId = 4
                         },
                         new
@@ -140,7 +147,7 @@ namespace Offer_API.Migrations
                             Id = 12,
                             Brand = "Tesla",
                             Model = "Model 3",
-                            RegistrationDate = new DateTime(2025, 7, 14, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1242),
+                            RegistrationDate = new DateTime(2025, 7, 15, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5630),
                             SupplierId = 4
                         },
                         new
@@ -148,7 +155,7 @@ namespace Offer_API.Migrations
                             Id = 13,
                             Brand = "Subaru",
                             Model = "Outback",
-                            RegistrationDate = new DateTime(2025, 7, 15, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1245),
+                            RegistrationDate = new DateTime(2025, 7, 16, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5631),
                             SupplierId = 5
                         },
                         new
@@ -156,7 +163,7 @@ namespace Offer_API.Migrations
                             Id = 14,
                             Brand = "Mazda",
                             Model = "Miata",
-                            RegistrationDate = new DateTime(2025, 7, 14, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1247),
+                            RegistrationDate = new DateTime(2025, 7, 15, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5632),
                             SupplierId = 5
                         },
                         new
@@ -164,7 +171,7 @@ namespace Offer_API.Migrations
                             Id = 15,
                             Brand = "Lada",
                             Model = "Samara",
-                            RegistrationDate = new DateTime(2025, 7, 13, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1249),
+                            RegistrationDate = new DateTime(2025, 7, 14, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5634),
                             SupplierId = 5
                         });
                 });
@@ -173,14 +180,16 @@ namespace Offer_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -190,31 +199,31 @@ namespace Offer_API.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2025, 6, 15, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1027),
+                            CreatedDate = new DateTime(2025, 6, 16, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5503),
                             Name = "Делимобиль"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2025, 6, 20, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1047),
+                            CreatedDate = new DateTime(2025, 6, 21, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5517),
                             Name = "Тачковоз"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2025, 6, 25, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1050),
+                            CreatedDate = new DateTime(2025, 6, 26, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5519),
                             Name = "ООО Тмыв"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2025, 6, 30, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1052),
+                            CreatedDate = new DateTime(2025, 7, 1, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5520),
                             Name = "Газпром"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2025, 7, 5, 17, 39, 21, 552, DateTimeKind.Local).AddTicks(1054),
+                            CreatedDate = new DateTime(2025, 7, 6, 22, 30, 53, 380, DateTimeKind.Local).AddTicks(5521),
                             Name = "Моторчик"
                         });
                 });

@@ -1,0 +1,74 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=p!r0l-P0Prosh3
+      - MSSQL_PID=Express
+    ports:
+      - "1401:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "p!r0l-P0Prosh3", "-d", "master", "-C", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  api:
+    build:
+      context: ./Offer-API
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ConnectionStrings__defCon=Server=db;Database=master;TrustServerCertificate=True;Encrypt=false;User Id=sa;Password=p!r0l-P0Prosh3
+    depends_on:
+      migration:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./offer-ui
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_URL=http://localhost:5000   
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+  migration:
+    build:
+      context: ./Offer-API
+      dockerfile: Dockerfile.migration
+    environment:
+      - ConnectionStrings__defCon=Server=db;Database=master;TrustServerCertificate=True;Encrypt=false;User Id=sa;Password=p!r0l-P0Prosh3
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "dotnet ef migrations add InitialCreate --project Offer-API.csproj &&
+             dotnet ef database update --project Offer-API.csproj"
+    networks:
+      - app-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  mssql-data:

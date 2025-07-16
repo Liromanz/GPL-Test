@@ -1,0 +1,9 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
+WORKDIR /src
+COPY ["Offer-API.csproj", "."]
+RUN dotnet restore "Offer-API.csproj" --source https://api.nuget.org/v3/index.json
+COPY . .
+WORKDIR "/src"
+RUN dotnet tool install --global dotnet-ef --version 8.0.8
+ENV PATH="${PATH}:/root/.dotnet/tools"
+ENTRYPOINT ["sh", "-c", "dotnet ef migrations add InitialCreate --project Offer-API.csproj && dotnet ef database update --project Offer-API.csproj"]
